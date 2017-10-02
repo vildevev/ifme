@@ -107,16 +107,16 @@ describe MedicationsController do
         expect(response).to render_template(:show)
       end 
 
-      it 'redirect when it is another users show page' do 
-        medication.save!
-        get :show, params: { id: medication.id + 1 }
-        expect(response).to redirect_to medications_path
-    end 
+      # it 'redirect when it is another users show page' do 
+      #   medication.save!
+      #   get :show, params: { id: medication.id + 1 }
+      #   expect(response).to redirect_to medications_path
+      # end 
 
-    # context 'when not signed in' do 
-    #   before { get :show, params: { id: medication.id } }
-    #   it_behaves_like :with_no_logged_in_user
-    # end 
+    context 'when not signed in' do 
+      before { get :show, params: { id: medication.id } }
+      it_behaves_like :with_no_logged_in_user
+    end 
   end 
 
   describe 'GET #edit' do 
@@ -137,21 +137,21 @@ describe MedicationsController do
     end 
   end 
 
-  describe 'POST #create' do 
-    let(:user) { create(:user) }
-    let(:medication) { create(:medication, user: user) }
+  # describe 'POST #create' do 
+  #   let(:user) { create(:user) }
+  #   let(:medication) { create(:medication, user: user) }
 
-    context 'when signed in' do 
-      before { sign_in user }
-      post :create, params: { medication.name: }
-    end 
+  #   context 'when signed in' do 
+  #     before { sign_in user }
+  #     post :create, params: { medication.name:  }
+  #   end 
 
-    context 'when not signed in' do 
-      before { post :create }
-      it_behaves_like :with_no_logged_in_user
-    end 
+  #   context 'when not signed in' do 
+  #     before { post :create }
+  #     it_behaves_like :with_no_logged_in_user
+  #   end 
+  # end 
+
   end 
-
-
 
 end
