@@ -137,20 +137,32 @@ describe MedicationsController do
     end 
   end 
 
-  # describe 'POST #create' do 
-  #   let(:user) { create(:user) }
-  #   let(:medication) { create(:medication, user: user) }
+  describe 'POST #create' do 
+    let(:user) { create(:user) }
+    let(:medication) { create(:medication, user: user) }
+    let(:valid_medication_params) do 
+      medication.attributes.merge(
+        'name' => 'valid',
+        'dosage' => '',
+        'refill' => '',
+        'userid' => user.id,
+        'total' => '',
+        'strength' => '',
+        'dosage_unit' => '',
+        'total_unit' => '',
+        'strength_unit' => ''
+      )
 
-  #   context 'when signed in' do 
-  #     before { sign_in user }
-  #     post :create, params: { medication.name:  }
-  #   end 
+    context 'when signed in' do 
+      before { sign_in user }
+      post :create, params: { medication.name:  }
+    end 
 
-  #   context 'when not signed in' do 
-  #     before { post :create }
-  #     it_behaves_like :with_no_logged_in_user
-  #   end 
-  # end 
+    context 'when not signed in' do 
+      before { post :create }
+      it_behaves_like :with_no_logged_in_user
+    end 
+  end 
 
   end 
 
